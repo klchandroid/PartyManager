@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">PartyManager</string>
+    <string name="title_activity_test">Test</string>
+    <string name="menu_new">Добавить</string>
+    <string name="menu_next">Дальше</string>
+    <string name="item_title">Статьи расходов</string>
+    <string name="person_title">Участники</string>
+    <string name="title_fish">Рыба заголовка</string>
+    <string name="item_edit_title">Редактирование статьи</string>
+    <string name="delete_item">Удалить</string>
+    <string name="edit_item">Изменить</string>
+    <string name="itemNameTextString">Название</string>
+    <string name="itemSummaTextString">Введите сумму</string>
+    <string name="saveString">Cохранить</string>
+    <string name="cancelString">Отменить</string>
+    <string name="textview">TextView</string>
+    <string name="zero">0</string>
+</resources>
