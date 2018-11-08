@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.nickolay.partymanager.data.MyConstants;
@@ -24,6 +25,8 @@ public class ItemActivity extends Activity {
     int itemIndex;
     EditText etName;
     EditText etSumma;
+    ListView lv;
+    AdapterSpendings as;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,7 @@ public class ItemActivity extends Activity {
         else if (MySpendings.class.isInstance(itemToEdit)) {
             fillMySpendings((MySpendings) itemToEdit);
         }
+
     }
 
     public void onClick(View view)
@@ -114,6 +118,10 @@ public class ItemActivity extends Activity {
     }
     private void fillMyPersons(MyPerson itemToEdit) {
         fillMyItem(itemToEdit);
+        lv = (ListView) findViewById(R.id.lvSpendings);
+        as = new AdapterSpendings(this, itemToEdit);
+        lv.setAdapter(as);
+
     }
 
 

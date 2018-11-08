@@ -2,14 +2,16 @@ package com.nickolay.partymanager.data;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 public class MyPerson extends MyItem {
-    private ArrayList<MyItem> inCharge;
+    private Set<MySpendings> inCharge = new HashSet<>();
 
-    public MyPerson(String name, double summa, ArrayList<MyItem> inCharge) {
+    public MyPerson(String name, double summa, Set<MySpendings> inCharge) {
         super(name, summa);
         this.inCharge = inCharge;
     }
@@ -17,19 +19,19 @@ public class MyPerson extends MyItem {
     public MyPerson() {
     }
 
-    public List<MyItem> getInCharge() {
-        return Collections.unmodifiableList((List)inCharge);
+    public Set<MySpendings> getInCharge() {
+        return Collections.unmodifiableSet(inCharge);
     }
 
-    public MyItem removeInChargeElement(int i)
+    public MyItem removeInChargeElement(MySpendings element)
     {
-        MyItem rem = inCharge.get(i);
-        inCharge.remove(i);
-        return rem;
+
+        inCharge.remove(element);
+        return element;
     }
-    public int addInChargeElement(MyItem mi)
+    public int addInChargeElement(MySpendings ms)
     {
-        inCharge.add(mi);
+        inCharge.add(ms);
         return inCharge.size();
     }
     @Override

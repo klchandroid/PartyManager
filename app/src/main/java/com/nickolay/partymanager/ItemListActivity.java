@@ -2,20 +2,15 @@ package com.nickolay.partymanager;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.melnykov.fab.FloatingActionButton;
 import com.nickolay.partymanager.data.MyConstants;
 import com.nickolay.partymanager.data.MyItem;
 
@@ -27,7 +22,7 @@ public class ItemListActivity extends Activity {
     ListView lv;
     ArrayList<MyItem> myItems;
     Serializable exampleObject;
-    ListAdapter la;
+    AdapterListItems la;
     TextView ts;
     Intent intent;
     Intent incomeIntent;
@@ -46,7 +41,7 @@ public class ItemListActivity extends Activity {
         setContentView(R.layout.activity_item_list);
         ts = (TextView) findViewById(R.id.tvItemItogo);
         lv = (ListView) findViewById(R.id.lvItems);
-        la = new ListAdapter(this, myItems);
+        la = new AdapterListItems(this, myItems);
         ListView lvMain = (ListView) findViewById(R.id.lvItems);
         lvMain.setAdapter(la);
         //onRestore(savedInstanceState);
@@ -65,7 +60,7 @@ public class ItemListActivity extends Activity {
                 break;
             case R.id.ibNext:
             case R.id.ibBack:
-                intent = new Intent(this, PersonsActivity.class);
+                intent = new Intent(this, MainActivity.class);
                 intent.putExtra(MyConstants.ITEM_LIST, (Serializable) myItems);
                 setResult(RESULT_OK, intent);
                 finish();

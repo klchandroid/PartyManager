@@ -11,11 +11,11 @@ import com.nickolay.partymanager.data.MyItem;
 
 import java.util.ArrayList;
 
-public class ListAdapter extends BaseAdapter {
+public class AdapterListItems extends BaseAdapter {
     private Context ctx;
     private LayoutInflater lInflater;
     private ArrayList<MyItem> objects;
-    ListAdapter(Context context, ArrayList<MyItem> things)
+    AdapterListItems(Context context, ArrayList<MyItem> things)
     {
         ctx = context;
         objects = things;

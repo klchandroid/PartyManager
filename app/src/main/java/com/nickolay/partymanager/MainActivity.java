@@ -53,6 +53,8 @@ public class MainActivity extends Activity {
         switch (requestCode){
             case MyConstants.SPENDINGS_LIST_ACTIVITY_REQUEST_CODE:
                 spendings = (ArrayList<MySpendings>) data.getSerializableExtra(MyConstants.ITEM_LIST);
+                //TODO Убрать эту хрень при первой возможности
+                MySpendings.AllSpendings = spendings;
                 break;
             case MyConstants.PERSONS_LIST_ACTIVITY_REQUEST_CODE:
                 persons = (ArrayList<MyPerson>) data.getSerializableExtra(MyConstants.ITEM_LIST);

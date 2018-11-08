@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Material">
-        <activity android:name=".PersonsActivity" />
         <activity android:name=".ItemListActivity">
         </activity>
         <activity android:name=".ItemActivity" />
