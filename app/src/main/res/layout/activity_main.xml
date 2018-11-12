@@ -20,4 +20,12 @@
         android:text="@string/person_title"
         android:onClick="onClick"
  />
+    <Button
+        android:id="@+id/btItog"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/itog_title"
+        android:onClick="onClick"
+        />
 </LinearLayout>

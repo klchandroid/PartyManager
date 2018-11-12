@@ -2,11 +2,14 @@ package com.nickolay.partymanager.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-public class MyItem implements LocalItems{
-    private final String id = UUID.randomUUID().toString() ;
+public class MyItem implements Serializable {
+    public final String ACTIVITY_TITLE = "";
+    public final String ACTIVITY_LIST_TITLE = "";
+    private String id;
     private String name;
     private double summa;
     public Class myClass = MyItem.class;
@@ -16,10 +19,15 @@ public class MyItem implements LocalItems{
     }
 
     public MyItem() {
+        setId();
         name = "";
         summa = 0d;
     }
 
+    public void setId()
+    {
+        id = UUID.randomUUID().toString();
+    }
     public String getId() {
         return id;
     }
@@ -63,7 +71,7 @@ public class MyItem implements LocalItems{
                 '}';
     }
 
-    public static double calculateMyItemsSumma(ArrayList<MyItem> items)
+    public static double calculateMyItemsSumma(List<? extends MyItem> items)
     {
         if (items == null) return  0d;
         double s = 0d;

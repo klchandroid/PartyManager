@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.nickolay.partymanager.data.MyConstants;
 import com.nickolay.partymanager.data.MyItem;
+import com.nickolay.partymanager.data.MyPerson;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,15 +27,18 @@ public class ItemListActivity extends Activity {
     TextView ts;
     Intent intent;
     Intent incomeIntent;
+    private String title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if(savedInstanceState != null){
             myItems =(ArrayList<MyItem>)  savedInstanceState.getSerializable(MyConstants.ITEM_LIST_TAG_FOR_SAVE);
+            exampleObject = (MyItem) savedInstanceState.getSerializable(MyConstants.ITEM_CLASS);
         } else {
             incomeIntent = getIntent();
             myItems = (ArrayList<MyItem>) incomeIntent.getSerializableExtra(MyConstants.ITEM_LIST);
             exampleObject = incomeIntent.getSerializableExtra(MyConstants.ITEM_CLASS);
+            title = incomeIntent.getStringExtra(MyConstants.ACTIVITY_TITLE);
             Log.d(TAG, "Class: " + exampleObject.getClass().getCanonicalName());
             if(myItems == null) return;
         }
@@ -45,7 +49,7 @@ public class ItemListActivity extends Activity {
         ListView lvMain = (ListView) findViewById(R.id.lvItems);
         lvMain.setAdapter(la);
         //onRestore(savedInstanceState);
-        tuneNavigationMenu();
+        tuneNavigationMenu(title);
         registerForContextMenu(lvMain);
         ifDataChanged();
     }
@@ -72,12 +76,15 @@ public class ItemListActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
+        Log.d("TestTest", "Result");
+        if(resultCode != RESULT_OK) return;
         MyItem newItem = (MyItem) data.getSerializableExtra(MyConstants.ITEM_TO_EDIT);
         int index = data.getIntExtra(MyConstants.ITEM_INDEX, -1);
         if(index == -1) myItems.add(newItem);
         else{
              myItems.set(index, newItem);
         }
+    //    Log.d("TestTest", "Size3: " + String.valueOf(((MyPerson)newItem).getInCharge().size()));
         ifDataChanged();
     }
     public void fillData() throws InterruptedException //test
@@ -97,10 +104,10 @@ public class ItemListActivity extends Activity {
         la.notifyDataSetChanged();
     }
 
-    private void tuneNavigationMenu()
+    private void tuneNavigationMenu(String title)
     {
         TextView tvTitle = (TextView) findViewById(R.id.tvTitle);
-        tvTitle.setText(R.string.item_title);
+        tvTitle.setText(title);
     }
 
     @Override
@@ -134,11 +141,15 @@ public class ItemListActivity extends Activity {
     public void onSaveInstanceState(Bundle savedInstanceState)
     {
         savedInstanceState.putSerializable(MyConstants.ITEM_LIST_TAG_FOR_SAVE, myItems);
+        savedInstanceState.putSerializable(MyConstants.ITEM_CLASS, exampleObject);
+        savedInstanceState.putString(MyConstants.ACTIVITY_TITLE, title);
     }
-    private void onRestore(Bundle savedInstanceState)
+    protected void onRestoreInstanceState(Bundle savedInstanceState)
     {
         if(savedInstanceState != null){
             myItems =(ArrayList<MyItem>)  savedInstanceState.getSerializable(MyConstants.ITEM_LIST_TAG_FOR_SAVE);
+            title = savedInstanceState.getString(MyConstants.ACTIVITY_TITLE);
+            tuneNavigationMenu(title);
             ifDataChanged();
         } else {
             try {
@@ -153,12 +164,14 @@ public class ItemListActivity extends Activity {
         intent = new Intent(this, ItemActivity.class);
         if(index == -1) {
             intent.putExtra(MyConstants.ITEM_TO_EDIT, exampleObject);
-            intent.putExtra(MyConstants.ITEM_INDEX, index);
+
         } else {
             intent.putExtra(MyConstants.ITEM_TO_EDIT, myItems.get(index));
-            intent.putExtra(MyConstants.ITEM_INDEX, index);
         }
+        intent.putExtra(MyConstants.ITEM_INDEX, index);
+        intent.putExtra(MyConstants.ACTIVITY_TITLE, ((MyItem)exampleObject).ACTIVITY_TITLE);
         startActivityForResult(intent, MyConstants.ITEM_ACTIVITY_REQUEST_CODE);
     }
 
 }
+//TODO: сохранять exampleObject

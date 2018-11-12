@@ -14,5 +14,8 @@
     <string name="saveString">Cохранить</string>
     <string name="cancelString">Отменить</string>
     <string name="textview">TextView</string>
+    <string name="summa">Сумма</string>
+
     <string name="zero">0</string>
+    <string name="itog_title">Итого</string>
 </resources>
